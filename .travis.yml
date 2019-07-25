@@ -9,3 +9,17 @@ before_install:
 
 script:
   - docker run -e CI=true arnabc/docker-devops-1 npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-south-1"
+  app: "docker-devops-trial-1"
+  env: "DockerDevopsTrial1-env"
+  bucket_name: "elasticbeanstalk-ap-south-1-647813168080"
+  bucket_path: "docker-devops-trial-1"
+
+  on:
+    branch: master
+
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
